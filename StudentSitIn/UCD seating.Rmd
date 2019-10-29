@@ -1,0 +1,106 @@
+---
+title: "Student Sit In"
+author: "Corine Romero"
+date: "10/28/2019"
+output: 
+  html_document:
+    toc: true
+    number_sectons: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# ONE SHOT assignment!
+this is an extra credit assignment, must be completed Monday Oct 28, turn-in closes at midnight!
+
+## Problem statement: 
+Students at UCD- is there a relation between where one sits and one's major? 
+
+## Introduction  
+
+<!-- where is the data found?  Is this and experiment or observational study?  !-->
+This is an observational study that came from 173 students at UCDavis.
+
+Data from this study came from... 
+
+
+
+```{r include=FALSE, echo=FALSE}
+library(tigerstats)
+data(ucdavis1)
+
+```
+
+$H_0$: there is no relationship between one's major and where one sits in a class   
+$H_A$: where one sits in class and one's major are related  
+
+<!-- Get the data: !-->
+
+names of the data in the data frame
+
+```{r echo=FALSE}
+UCDdataframe = data.frame(seat=ucdavis1$Seat, major=ucdavis1$class, data=ucdavis1)
+names(UCDdataframe)
+```
+## Methods
+
+<!--  describe analysis methods here 
+what are the variable types, and indicate gaphical, numerical, and inferential methods appropriate
+for this question  !--> 
+Both variables in this analysis are categorical, there for we use a bar graph and tables to summarize the data, and a chi squared test for inference.
+
+## Data summary
+
+**Graphical summary**
+put the graphic description of the data here
+
+```{r}
+barchartGC(~seat+major, data=UCDdataframe, main='Seat prefrence vs. Major')
+```
+
+Explain what the graph shows
+The bar graph shows that most students like to sit in the middle.  The bar graph also shows that more students from the liberal arts major will tend to sit in the middle.
+
+**Numerical summary**
+put numerical summary here
+
+```{r}
+tab1= xtabs(formula = ~seat+major, data=UCDdataframe,)
+rowPerc(tab1)
+colPerc(tab1)
+```
+
+Explain what the numeric summary says
+The numeric summary says that both the Libarts and Nonliberarts majors tend to like the middle.
+
+## Inferential Results
+
+
+```{r}
+chisqtestGC(tab1)
+```
+
+what is the p-value?
+The P-value is 0.2173 
+
+## Results and conclusions
+
+<!-- explain-- is there evidence that certain majors tend to sit in particular areas of the class?  Can the results of this test be generalized to all majors in all universities? !-->
+Because the p-value is grater than .05, we fail to reject the null hypothesis and can not support the hypothesis that there is a connection between where one sits and what ones major is.
+
+Because this test can not be generalized to all universities because it is not a random sample, it is specific to UCdavis.
+<!--
+push results to your github account, turn in the URL
+
+--OR--
+
+If you did not fork my repo to your github account,
+create a repository in your github account for this project, get the URL for that repo and 
+(in the terminal window..)
+
+$git remote add origin URL_of_your_github_repo
+$git push -u origin master
+
+!-->
